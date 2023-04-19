@@ -3,6 +3,7 @@ package com.dio.desafiofinal.services;
 import com.dio.desafiofinal.model.Calendar;
 import com.dio.desafiofinal.model.form.CalendarForm;
 import com.dio.desafiofinal.repository.CalendarRepository;
+import jakarta.servlet.http.PushBuilder;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,20 @@ public class CalendarService {
 
     public List<Calendar> getAll() {
         return calendarRepository.findAll();
+    }
+
+    public Calendar getOne(Long id) {
+        return calendarRepository.findById(id).orElseThrow(NullPointerException::new);
+    }
+
+    public Calendar alterarCalendar(Calendar form, Long id) {
+        Calendar calendar = calendarRepository.findById(id).orElseThrow(NullPointerException::new);
+        calendar.setDataDoAgendamento(form.getDataDoAgendamento());
+        calendar.setClientes(form.getClientes());
+        return calendarRepository.save(calendar);
+    }
+
+    public void deleteCalendar(Long id) {
+        calendarRepository.deleteById(id);
     }
 }

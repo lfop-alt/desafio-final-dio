@@ -29,16 +29,17 @@ public class CalendarController {
 
     @PutMapping("{id}")
     public Calendar atualizarCalendar(@RequestBody Calendar form, @PathVariable Long id) {
-        return  null;
+        return calendarService.alterarCalendar(form, id);
     }
 
     @DeleteMapping("{id}")
     public String deletarCalendar(@PathVariable Long id) {
-        return null;
+        calendarService.deleteCalendar(id);
+        return "Calendar Excluido";
     }
 
     @GetMapping("{id}")
     public Calendar buscarOneCalendar(@PathVariable Long id) {
-        return null;
+        return calendarService.getOne(id);
     }
 }
